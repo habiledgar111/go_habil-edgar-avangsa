@@ -13,6 +13,8 @@ func main() {
 }
 
 func primeNumber(bil int) string {
+
+	//big O sqrt(n)
 	if bil <= 1 {
 		return "Bukan Bilangan Prima"
 	}
