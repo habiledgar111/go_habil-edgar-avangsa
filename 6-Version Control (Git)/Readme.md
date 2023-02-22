@@ -1,4 +1,4 @@
-# (^) Version Control (Git)
+# (6) Version Control (Git)
 
 ## materi yang dibahas pada section ini :
   - mengetahui apa itu version control dan apa itu git
