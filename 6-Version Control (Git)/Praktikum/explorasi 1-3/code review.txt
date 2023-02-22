@@ -1,0 +1,6 @@
+pada soal explorasi 1-1 dan 1-2 saya menggunakan branch dengan nama branch2 untuk menyimpan code yang akan conflict
+
+pada branch main saya akan melakukan prinln "print 1" sampai dengan "print 7"
+namun pada branch2 saya akan melakukan prinln "habil 1" sampai dengan "habil 7" pada baris yang sama 
+sehingga disaat main akan melakukan pull dari branch2 akan terjadi conflict
+yang dimana conflict saya melakukan penyimpanan dari keduanya jadi melakukan "print 1 -7" kemudian "habil 1-7"
