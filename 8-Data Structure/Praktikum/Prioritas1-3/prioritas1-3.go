@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"strconv"
 )
 
 func main() {
@@ -12,9 +13,29 @@ func main() {
 }
 
 func munculSekali(angka string) []int {
+
 	if angka == "" {
 		return []int{}
 	}
-	fmt.Println("angka : ", angka[0])
-	return []int{}
+
+	temp := make(map[int]int)
+	for i := range angka {
+		str := string(angka[i])
+		t, _ := strconv.Atoi(str)
+		if _, value := temp[t]; !value {
+			temp[t] = 1
+		} else {
+			temp[t]++
+		}
+	}
+
+	result := []int{}
+
+	for key, _ := range temp {
+		if temp[key] == 1 {
+			result = append(result, key)
+		}
+	}
+
+	return result
 }
