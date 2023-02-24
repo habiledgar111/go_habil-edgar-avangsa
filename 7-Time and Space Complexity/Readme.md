@@ -1,4 +1,4 @@
-# (&) Time and Space Complexity 
+# (7) Time and Space Complexity 
 
 ## materi yang dibahas pada section ini :
   - comlexity di bagi menjadi 2, yaitu time dan space 
