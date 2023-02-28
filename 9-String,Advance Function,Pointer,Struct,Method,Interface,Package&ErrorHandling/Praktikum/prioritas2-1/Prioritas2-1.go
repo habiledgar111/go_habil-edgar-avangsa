@@ -11,7 +11,7 @@ func caesar(offset int, input string) string {
 		temp := input[i] + byte(geser)
 		if temp > 122 {
 			temp -= 122
-			temp += 97
+			temp += 96
 		}
 		result += string(temp)
 	}
