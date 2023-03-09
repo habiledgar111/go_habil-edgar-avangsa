@@ -8,6 +8,7 @@ func simpleEquations(a, b, c int) interface{} {
 	//formula 1 x+y+z
 	//formula 2 xyz
 	//formula 3 x*x + y*y + z*z
+	//y/a+y/b+y/c = x^2-z/2
 	for x := 1; x <= b; x++ {
 		for y := 1; y <= b; y++ {
 			for z := 1; z <= b; z++ {
