@@ -44,7 +44,8 @@ func main() {
 	// }
 	// var obj object
 	// json.Unmarshal(data, &obj)
-	for _, item := range <-ch {
+	data := <-ch
+	for _, item := range data {
 		fmt.Println("======")
 		fmt.Println(item.Title)
 		fmt.Println(item.Price)
@@ -55,6 +56,9 @@ func main() {
 }
 
 func getData(ch chan object, wg *sync.WaitGroup) {
+
+	defer wg.Done()
+
 	response, err := http.Get("https://fakestoreapi.com/products")
 
 	if err != nil {
@@ -70,6 +74,4 @@ func getData(ch chan object, wg *sync.WaitGroup) {
 	json.Unmarshal(data, &obj)
 	ch <- obj
 	close(ch)
-	wg.Done()
-
 }
