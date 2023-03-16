@@ -1,6 +1,6 @@
-# (12) Concurrent Programming
+# (16) Join Union Agregrasi dan Subquery
 
 ## materi yang dibahas pada section ini :
-  - penjelasan mengenai perbedaan linear, paralel, dan concurrent 
-  - untuk go routine menunggu go routin lain dapat menggunakan wait group
-  - untuk mengetasi data race dapat menggunakan mutex
+  - membahas tentang apa itu join union agregrasi dan subquery
+  - cara penggunaan 
+  - dan demonstrasi dengan cara live code di dalam kelas
