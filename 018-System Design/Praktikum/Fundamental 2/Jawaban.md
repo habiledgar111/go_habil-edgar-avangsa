@@ -5,7 +5,7 @@
 
 ## Redis
 **Select**
-HGETALL users
+HGETALL users/n\n
 **Insert**
 MULTI
 HMSET users:(id number) name (name user) banknumber (bank number) numberphone (numberphone)
