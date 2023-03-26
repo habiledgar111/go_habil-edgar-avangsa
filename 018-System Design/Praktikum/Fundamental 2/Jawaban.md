@@ -4,24 +4,32 @@
 
 
 ## Redis
-**Select**
+**Select**  
+
 HGETALL users  
 
-**Insert**
+**Insert**  
+
 MULTI
 HMSET users:(id number) name (name user) banknumber (bank number) numberphone (numberphone)
 EXEC
 
 ## Neo4j
-**Select**
+**Select**  
+
 MATCH (ee:Users)
-RETURN ee
-**Insert**
+RETURN ee  
+
+**Insert**  
+
 CREATE(ee:User{id : "(id number)", name: "(name user)", banknumber : "(bank number)", numberphone : "(numberphone)"})
 
 ## Cassandra
-**Select**
-SELECT * FROM Users
-**Insert**
+**Select**  
+
+SELECT * FROM Users  
+
+**Insert**  
+
 INSERT into Users (id,name,banknumber,numberphone) 
 values ((id number), (name user), (bank number), (numberphone))
