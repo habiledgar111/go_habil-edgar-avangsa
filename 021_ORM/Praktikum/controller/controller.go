@@ -15,6 +15,7 @@ import (
 var (
 	DB   *gorm.DB
 	user *model.User
+	book *model.Book
 )
 
 func init() {
@@ -23,7 +24,7 @@ func init() {
 }
 
 func InitMigration() {
-	DB.AutoMigrate(user)
+	DB.AutoMigrate(user, book)
 }
 
 func InitDB() {
@@ -117,7 +118,107 @@ func UpdateUser(c echo.Context) error {
 
 func DeleteUser(c echo.Context) error {
 	id, _ := strconv.Atoi(c.Param("id"))
-	DB.Delete(user, id)
+	temp := DB.Unscoped().Delete(user, id)
+	if temp.RowsAffected < 1 {
+		return c.JSON(http.StatusBadRequest, map[string]interface{}{
+			"massage": "cant find data",
+		})
+	}
+	return c.JSON(http.StatusOK, map[string]interface{}{
+		"massage": "success delete data",
+	})
+}
+
+func GetAllBooks(c echo.Context) error {
+	var books []model.Book
+	if err := DB.Find(&books).Error; err != nil {
+		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
+	}
+	return c.JSON(http.StatusOK, map[string]interface{}{
+		"message": "success get all users",
+		"users":   books,
+	})
+}
+
+func GetBook(c echo.Context) error {
+	var book model.Book
+	id := c.Param("id")
+	if err := DB.First(&book, id).Error; err != nil {
+		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
+	}
+
+	return c.JSON(http.StatusOK, map[string]interface{}{
+		"message": "success get user",
+		"book":    book,
+	})
+}
+
+func CreateBook(c echo.Context) error {
+	var books model.Book
+	json_map := make(map[string]interface{})
+	err := json.NewDecoder(c.Request().Body).Decode(&json_map)
+	if err != nil {
+		return c.JSON(http.StatusBadRequest, map[string]interface{}{
+			"Massage": "json cant empty",
+		})
+	}
+	judul := fmt.Sprintf("%v", json_map["judul"])
+	penulis := fmt.Sprintf("%v", json_map["penulis"])
+	penerbit := fmt.Sprintf("%v", json_map["penerbit"])
+
+	books = model.Book{
+		Judul:    judul,
+		Penulis:  penulis,
+		Penerbit: penerbit,
+	}
+	result := DB.Create(&books)
+	return c.JSON(http.StatusOK, map[string]interface{}{
+		"message":     "success create user",
+		"rowaffected": result.RowsAffected,
+	})
+}
+
+func UpdateBook(c echo.Context) error {
+	id, _ := strconv.Atoi(c.Param("id"))
+	json_map := make(map[string]interface{})
+	var dbbook model.Book
+
+	if err := DB.First(&dbbook, id).Error; err != nil {
+		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
+	}
+
+	err := json.NewDecoder(c.Request().Body).Decode(&json_map)
+	if err != nil {
+		return c.JSON(http.StatusBadRequest, map[string]interface{}{
+			"Massage": "json cant empty",
+		})
+	}
+
+	if json_map["judul"] != nil {
+		dbbook.Judul = fmt.Sprintf("%v", json_map["judul"])
+	}
+	if json_map["penulis"] != nil {
+		dbbook.Penulis = fmt.Sprintf("%v", json_map["penulis"])
+	}
+	if json_map["penerbit"] != nil {
+		dbbook.Penerbit = fmt.Sprintf("%v", json_map["penerbit"])
+	}
+
+	DB.Save(&dbbook)
+	return c.JSON(http.StatusOK, map[string]interface{}{
+		"massage": "success update data",
+		"user":    dbbook,
+	})
+}
+
+func DeleteBook(c echo.Context) error {
+	id, _ := strconv.Atoi(c.Param("id"))
+	temp := DB.Unscoped().Delete(book, id)
+	if temp.RowsAffected < 1 {
+		return c.JSON(http.StatusBadRequest, map[string]interface{}{
+			"massage": "cant find data",
+		})
+	}
 	return c.JSON(http.StatusOK, map[string]interface{}{
 		"massage": "success delete data",
 	})
