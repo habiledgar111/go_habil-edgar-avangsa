@@ -11,3 +11,7 @@ func Devide(a, b float64) float64 {
 func Multiply(a, b int) int {
 	return a * b
 }
+
+func Subtraction (a,b int)int{
+	return a - b 
+}
