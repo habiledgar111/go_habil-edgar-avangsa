@@ -12,5 +12,6 @@ func main() {
 
 	e := echo.New()
 	e.GET("/users", usecase.GetAll)
-	e.POST("/users")
+	e.POST("/users", usecase.Create)
+	e.Start(":1323")
 }
