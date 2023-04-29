@@ -1,5 +1,3 @@
 /vendor
-/go.mod
-/go.sum
-go.mod
-go.sum
+/026_Docker/Praktikum/vendor
+
