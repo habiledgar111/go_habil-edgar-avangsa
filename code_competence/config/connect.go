@@ -10,7 +10,7 @@ var (
 )
 
 func Open() error {
-	dsn := "root:Mbahbambang123@tcp(localhost:3306)/miniproject?charset=utf8mb4&parseTime=True&loc=Local"
+	dsn := "root:Mbahbambang123@tcp(localhost:3306)/codecompetence?charset=utf8mb4&parseTime=True&loc=Local"
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	if err != nil {
 		panic(err)
