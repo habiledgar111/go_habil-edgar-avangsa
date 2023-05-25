@@ -35,13 +35,7 @@ func GetBarangID(c echo.Context) error {
 		})
 	}
 
-	err = config.DB.Model(&model.Barang{}).Preload("Kategori").Find(&barang, id).Error
-	if err != nil {
-		c.JSON(http.StatusInternalServerError, map[string]interface{}{
-			"message": "error when get data",
-			"error":   err,
-		})
-	}
+	config.DB.Model(&model.Barang{}).Preload("Kategori").Find(&barang, id)
 
 	return c.JSON(http.StatusOK, map[string]interface{}{
 		"message": "success when get data",
